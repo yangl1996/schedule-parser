@@ -51,4 +51,44 @@ file_text = raw_file.read()
 
 parser = ScheduleParser()
 parser.feed(file_text)
-print(class_info)
+
+
+# Parsing completed
+refined_table = []
+
+for every_class in class_info:
+    class_day = every_class['day']
+    class_time = every_class['time']
+    class_name = every_class['info'][0]
+    #  0 for each week
+    #  1 for odd  week
+    # -1 for even week
+    class_type = 0
+    for all_info in every_class['info']:
+        if not all_info.find('单周') == -1:
+            class_type = 1
+            break
+        elif  not all_info.find('双周') == -1:
+            class_type = -1
+            break
+    class_test = 'N/A'
+    for all_info in every_class['info']:
+        if not all_info.find('考试') == -1:
+            class_test = all_info
+    class_location = 'N/A'
+    for all_info in every_class['info']:
+        if all_info.startswith('(') and not all_info.startswith('(备注'):
+            class_location = all_info[1:all_info.find(')')]
+    class_remark = 'N/A'
+    for all_info in every_class['info']:
+        if all_info.startswith('(备注'):
+            class_remark = all_info[1:all_info.find(')')]
+    refined_info = {'day': class_day, 'time': class_time, 'name': class_name,
+                    'type': class_type, 'exam': class_test, 'room': class_location, 'remark': class_remark}
+    refined_table.append(refined_info)
+
+
+# Refine completed
+
+
+print(refined_table)
