@@ -89,6 +89,18 @@ for every_class in class_info:
 
 
 # Refine completed
+for every_class in refined_table:
+    every_class['start'] = every_class['time']
+    every_class['end'] = every_class['time']
+    del every_class['time']
+    for another_class in refined_table:
+        if not another_class == every_class:
+            if another_class['day'] == every_class['day'] and another_class['name'] == every_class['name']:
+                if another_class['time'] < every_class['start']:
+                    every_class['start'] = another_class['time']
+                elif another_class['time'] > every_class['end']:
+                    every_class['end'] = another_class['time']
+                refined_table.remove(another_class)
 
 
 print(refined_table)
