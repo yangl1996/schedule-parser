@@ -48,6 +48,7 @@ file_name = input('Enter file path of HTML\n')
 try:
     raw_file = open(file_name, 'r', encoding='utf-8')
     file_text = raw_file.read()
+    file_text = file_text[file_text.find('<table id="classAssignment" class="course" width="100%">'):file_text.find('<script language="JavaScript" type="text/JavaScript">')]
 except:
     print("Can't open HTML file. Exiting.")
     exit()
