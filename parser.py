@@ -118,7 +118,9 @@ class ScheduleParser(HTMLParser):
             temp_data_field.append(data)
 
 try:
-    file_text = handle_iaaa('', '')  # enter username and password
+    raw_username = input('Please enter username: ')
+    raw_password = input('Please enter password: ')
+    file_text = handle_iaaa(raw_username, raw_password)  # enter username and password
     if not file_text == 'LoginError':
         file_text = file_text[file_text.find('<table id="classAssignment" class="course" width="100%">'):file_text.find('<script language="JavaScript" type="text/JavaScript">')]
         print('Class info fetched')
