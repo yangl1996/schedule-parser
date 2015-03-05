@@ -51,7 +51,7 @@ file_text = raw_file.read()
 
 parser = ScheduleParser()
 parser.feed(file_text)
-
+raw_file.close()
 
 # Parsing completed
 refined_table = []
@@ -103,4 +103,138 @@ for every_class in refined_table:
                 refined_table.remove(another_class)
 
 
-print(refined_table)
+def get_time(class_no, start=True):
+    if start is True:
+        if class_no == 1:
+            return '080000'
+        elif class_no == 2:
+            return '090000'
+        elif class_no == 3:
+            return '101000'
+        elif class_no == 4:
+            return '111000'
+        elif class_no == 5:
+            return '130000'
+        elif class_no == 6:
+            return '140000'
+        elif class_no == 7:
+            return '151000'
+        elif class_no == 8:
+            return '161000'
+        elif class_no == 9:
+            return '171000'
+        elif class_no == 10:
+            return '184000'
+        elif class_no == 11:
+            return '194000'
+        elif class_no == 12:
+            return '204000'
+    else:
+        if class_no == 1:
+            return '085000'
+        elif class_no == 2:
+            return '095000'
+        elif class_no == 3:
+            return '110000'
+        elif class_no == 4:
+            return '120000'
+        elif class_no == 5:
+            return '135000'
+        elif class_no == 6:
+            return '145000'
+        elif class_no == 7:
+            return '160000'
+        elif class_no == 8:
+            return '170000'
+        elif class_no == 9:
+            return '180000'
+        elif class_no == 10:
+            return '193000'
+        elif class_no == 11:
+            return '203000'
+        elif class_no == 12:
+            return '213000'
+
+
+ics_file = '''BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+VERSION:2.0
+METHOD:PUBLISH
+X-WR-CALNAME:课程
+X-WR-TIMEZONE:Asia/Shanghai
+X-APPLE-CALENDAR-COLOR:#1BADF8
+BEGIN:VTIMEZONE
+TZID:Asia/Shanghai
+BEGIN:STANDARD
+TZOFFSETFROM:+0900
+RRULE:FREQ=YEARLY;UNTIL=19910914T150000Z;BYMONTH=9;BYDAY=3SU
+DTSTART:19890917T000000
+TZNAME:GMT+8
+TZOFFSETTO:+0800
+END:STANDARD
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0800
+DTSTART:19910414T000000
+TZNAME:GMT+8
+TZOFFSETTO:+0900
+RDATE:19910414T000000
+END:DAYLIGHT
+END:VTIMEZONE
+'''
+uid_count = 0
+
+for every_class in refined_table:
+    class_file = '''BEGIN:VEVENT
+TRANSP:OPAQUE
+SEQUENCE:0
+LAST-MODIFIED:20150305T080000Z
+DTSTAMP:20150305T080000Z
+CREATED:20150305T080000Z
+UID:lei's-schedule-generator
+'''
+
+    class_file += "UID:lei's-schedule-generator"
+    class_file += str(uid_count) + '\n'
+    uid_count += 1
+
+    # EXDATE;TZID=Asia/Shanghai:20141111T151000 means exclude the date in the event loop
+    class_file += ('SUMMARY:' + every_class['name'] + '\n')
+
+    class_file += ('LOCATION:' + every_class['room'] + '\n')
+
+    if every_class['type'] == 0:
+        class_file += ('RRULE:FREQ=WEEKLY;COUNT=16' + '\n')
+    else:
+        class_file += ('RRULE:FREQ=WEEKLY;INTERVAL=2;COUNT=8' + '\n')
+
+    class_file += 'DTSTART;TZID=Asia/Shanghai:'
+    if every_class['type'] == 0 or every_class['type'] == 1:
+        class_file += str(20150301 + every_class['day'])
+    else:
+        class_file += str(20150308 + every_class['day'])
+    class_file += 'T'
+    class_file += get_time(every_class['start'])
+    class_file += '\n'
+
+    class_file += 'DTEND;TZID=Asia/Shanghai:'
+    if every_class['type'] == 0 or every_class['type'] == 1:
+        class_file += str(20150301 + every_class['day'])
+    else:
+        class_file += str(20150308 + every_class['day'])
+    class_file += 'T'
+    class_file += get_time(every_class['end'], False)
+    class_file += '\n'
+
+    class_file += 'END:VEVENT'
+    class_file += '\n'
+
+    ics_file += class_file
+    class_file = ''
+
+
+ics_file += 'END:VCALENDAR'
+
+write_file = open('class.ics', 'w', encoding='utf-8')
+write_file.write(ics_file)
+write_file.close()
+print('Done!')
