@@ -44,8 +44,12 @@ class ScheduleParser(HTMLParser):
             temp_data_field.append(data)
 
 
-file_name = 'sample.html'
-raw_file = open(file_name, 'r', encoding='utf-8')
+file_name = input('Enter file path of HTML\n')
+try:
+    raw_file = open(file_name, 'r', encoding='utf-8')
+except:
+    print("Can't open HTML file. Exiting.")
+    exit()
 file_text = raw_file.read()
 
 
@@ -234,7 +238,11 @@ UID:lei's-schedule-generator
 
 ics_file += 'END:VCALENDAR'
 
-write_file = open('class.ics', 'w', encoding='utf-8')
-write_file.write(ics_file)
-write_file.close()
+try:
+    write_file = open('class.ics', 'w', encoding='utf-8')
+    write_file.write(ics_file)
+    write_file.close()
+except:
+    print('Error writing file. Exiting.')
+    exit()
 print('Done!')
