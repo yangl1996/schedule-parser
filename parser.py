@@ -195,7 +195,6 @@ SEQUENCE:0
 LAST-MODIFIED:20150305T080000Z
 DTSTAMP:20150305T080000Z
 CREATED:20150305T080000Z
-UID:lei's-schedule-generator
 '''
 
     class_file += "UID:lei's-schedule-generator"
