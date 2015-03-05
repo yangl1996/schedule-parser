@@ -47,10 +47,10 @@ class ScheduleParser(HTMLParser):
 file_name = input('Enter file path of HTML\n')
 try:
     raw_file = open(file_name, 'r', encoding='utf-8')
+    file_text = raw_file.read()
 except:
     print("Can't open HTML file. Exiting.")
     exit()
-file_text = raw_file.read()
 
 
 parser = ScheduleParser()
