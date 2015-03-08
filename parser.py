@@ -128,6 +128,13 @@ class ScheduleParser(HTMLParser):
 file_text = handle_iaaa(form["stuID"].value, form["password"].value)  # enter username and password
 if not file_text == 'LoginError':
     file_text = file_text[file_text.find('<table id="classAssignment" class="course" width="100%">'):file_text.find('<script language="JavaScript" type="text/JavaScript">')]
+else:
+    error_page = open('error.html', 'r', encoding='utf-8')
+    print("Content-Type: text/html; charset=utf-8")
+    print()
+    print(error_page.read())
+    error_page.close()
+    exit()
 
 parser = ScheduleParser()
 parser.feed(file_text)
