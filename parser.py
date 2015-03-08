@@ -221,7 +221,7 @@ DTSTAMP:20150305T080000Z
 CREATED:20150305T080000Z
 '''
 
-    class_file += "UID:lei's-schedule-generator-" + uid_identifier
+    class_file += ("UID:lei's-schedule-generator-" + uid_identifier)
     class_file += str(uid_count) + '\n'
     uid_count += 1
 
