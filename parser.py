@@ -9,6 +9,10 @@ form = cgi.FieldStorage()
 import cgitb
 cgitb.enable()
 
+import sys
+import codecs
+sys.stdout = codecs.getwriter('utf-8')(sys.stdout.detach())
+
 
 def handle_iaaa(username, password):
     URL = 'https://iaaa.pku.edu.cn/iaaa/oauthlogin.do'
@@ -259,6 +263,6 @@ ics_file += 'END:VCALENDAR'
 
 
 print("Content-Type: text/calendar; charset=utf-8")
-print("Content-Disposition: attachment; filename=%s" % ('class.ics'))
+print("Content-Disposition: attachment; filename=%s" % 'class.ics')
 print()
-print(ics_file.encode())
+print(ics_file)
