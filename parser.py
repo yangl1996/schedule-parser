@@ -258,7 +258,7 @@ CREATED:20150305T080000Z
 ics_file += 'END:VCALENDAR'
 
 
-print("Content-Type: text/calendar")
+print("Content-Type: text/calendar; charset=utf-8")
 print("Content-Disposition: attachment; filename=%s" % ('class.ics'))
 print()
-print(ics_file)
+print(ics_file.encode())
