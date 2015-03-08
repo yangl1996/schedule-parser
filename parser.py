@@ -210,6 +210,7 @@ END:DAYLIGHT
 END:VTIMEZONE
 '''
 uid_count = 0
+uid_identifier = str(random.random())
 
 for every_class in refined_table:
     class_file = '''BEGIN:VEVENT
@@ -220,7 +221,7 @@ DTSTAMP:20150305T080000Z
 CREATED:20150305T080000Z
 '''
 
-    class_file += "UID:lei's-schedule-generator"
+    class_file += "UID:lei's-schedule-generator-" + uid_identifier
     class_file += str(uid_count) + '\n'
     uid_count += 1
 
