@@ -62,9 +62,10 @@
 				</div>
 			</div>
 			<div class="form-actions">
+                <a href="javascript:;"  id="forget-password">
 				<button type="submit" class="btn blue pull-right">
 				Login <i class="m-icon-swapright m-icon-white"></i>
-				</button>
+				</button></a>
                 <p>Download will start in seconds after you submit account information.</p>
 			</div>
 			<div class="forget-password">
@@ -82,23 +83,19 @@
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->
 		<form class="form-vertical forget-form" action="index.html" method="post">
-			<h3 >Forget Password ?</h3>
+			<h3 >You are all set!</h3>
+            <h4>Download will start in a few seconds.</h4>
 			<p>Enter your e-mail address below to reset your password.</p>
-			<div class="control-group">
-				<div class="controls">
-					<div class="input-icon left">
-						<i class="icon-envelope"></i>
-						<input class="m-wrap placeholder-no-fix" type="text" placeholder="Email" autocomplete="off" name="email" />
-					</div>
-				</div>
-			</div>
+            <p>An .ics file will start downloading automatically. This file contains your course schedule, and is supported
+                by most calendar applications, including Apple Calender, Google Calendar and Microsoft Outlook. Most mobile
+                devices are also compatible with it.</p>
+            <p>Open the downloaded file using a calendar application and import your course schedule.</p>
+            <p>In case you have problem using it or detect some bug, please contact <a href="http://www.yangl1996.com" target="_blank">Lei Yang</a>
+                or open a issue on my <a href="https://github.com/yangl1996/schedule-parser" target="_blank">GitHub repository</a>.</p>
 			<div class="form-actions">
 				<button type="button" id="back-btn" class="btn">
 				<i class="m-icon-swapleft"></i> Back
 				</button>
-				<button type="submit" class="btn blue pull-right">
-				Submit <i class="m-icon-swapright m-icon-white"></i>
-				</button>            
 			</div>
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
