@@ -1,8 +1,17 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import requests
 import random
 import json
 from html.parser import HTMLParser
+import cgi
+form = cgi.FieldStorage()
+import cgitb
+cgitb.enable()
+
+import sys
+import codecs
+sys.stdout = codecs.getwriter('utf-8')(sys.stdout.detach())
 
 
 def handle_iaaa(username, password):
@@ -78,7 +87,6 @@ def get_time(class_no, start=True):
             return '213000'
 
 
-print('Initializing')
 time_count = 0
 day_count = -1
 now_class = False
@@ -117,20 +125,16 @@ class ScheduleParser(HTMLParser):
         if now_class:
             temp_data_field.append(data)
 
-try:
-    raw_username = input('Please enter username: ')
-    raw_password = input('Please enter password: ')
-    file_text = handle_iaaa(raw_username, raw_password)  # enter username and password
-    if not file_text == 'LoginError':
-        file_text = file_text[file_text.find('<table id="classAssignment" class="course" width="100%">'):file_text.find('<script language="JavaScript" type="text/JavaScript">')]
-        print('Class info fetched')
-    else:
-        print("Error logging in elective system! Exiting.")
-        exit()
-except:
-    print("Fatal Error! Exiting.")
+file_text = handle_iaaa(form["stuID"].value, form["password"].value)  # enter username and password
+if not file_text == 'LoginError':
+    file_text = file_text[file_text.find('<table id="classAssignment" class="course" width="100%">'):file_text.find('<script language="JavaScript" type="text/JavaScript">')]
+else:
+    error_page = open('error.html', 'r', encoding='utf-8')
+    print("Content-Type: text/html; charset=utf-8")
+    print()
+    print(error_page.read())
+    error_page.close()
     exit()
-
 
 parser = ScheduleParser()
 parser.feed(file_text)
@@ -185,7 +189,6 @@ for every_class in refined_table:
                 refined_table.remove(another_class)
 
 
-print('Class info HTML parsed!')
 
 
 ics_file = '''BEGIN:VCALENDAR
@@ -214,6 +217,7 @@ END:DAYLIGHT
 END:VTIMEZONE
 '''
 uid_count = 0
+uid_identifier = str(random.random())
 
 for every_class in refined_table:
     class_file = '''BEGIN:VEVENT
@@ -224,7 +228,7 @@ DTSTAMP:20150305T080000Z
 CREATED:20150305T080000Z
 '''
 
-    class_file += "UID:lei's-schedule-generator"
+    class_file += ("UID:lei's-schedule-generator-" + uid_identifier)
     class_file += str(uid_count) + '\n'
     uid_count += 1
 
@@ -265,12 +269,8 @@ CREATED:20150305T080000Z
 
 ics_file += 'END:VCALENDAR'
 
-try:
-    print('Writing .ics file!')
-    write_file = open('class.ics', 'w', encoding='utf-8')
-    write_file.write(ics_file)
-    write_file.close()
-except:
-    print('Error writing file. Exiting.')
-    exit()
-print('Done!')
+
+print("Content-Type: text/calendar; charset=utf-8")
+print("Content-Disposition: attachment; filename=%s" % 'class.ics')
+print()
+print(ics_file)
