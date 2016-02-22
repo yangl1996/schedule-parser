@@ -179,13 +179,15 @@ for every_class in refined_table:
     every_class['start'] = every_class['time']
     every_class['end'] = every_class['time']
     del every_class['time']
-    for another_class in refined_table:
+    
+for every_class in refined_table:
+    for another_class in refined table:
         if not another_class == every_class:
             if another_class['day'] == every_class['day'] and another_class['name'] == every_class['name']:
-                if another_class['time'] < every_class['start']:
-                    every_class['start'] = another_class['time']
-                elif another_class['time'] > every_class['end']:
-                    every_class['end'] = another_class['time']
+                if another_class['end'] == every_class['start']:
+                    every_class['start'] = another_class['start']
+                elif another_class['start'] == every_class['end']:
+                    every_class['end'] = another_class['end']
                 refined_table.remove(another_class)
 
 
