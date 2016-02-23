@@ -1,4 +1,7 @@
-# schedule-parser
-parser for peking university schedule
+# Peking University Schedule Parser
 
-auto downloads the class election results and generate a ics file containing your class information
+Forget those clumsy helper apps and check your class schedule directly in your phone calendar! Peking University Schedule Parser automatically collects your course information and generates a `.ics` file containing all class information for a semester.
+
+Running instance at [cp.yangl1996.com](https://cp.yangl1996.com)
+
+System status at [status.yangl1996.com](https://status.yangl1996.com)
