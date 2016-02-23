@@ -4,4 +4,4 @@ Forget those clumsy helper apps and check your class schedule directly in your p
 
 Running instance at [cp.yangl1996.com](https://cp.yangl1996.com)
 
-System status at [status.yangl1996.com](https://status.yangl1996.com)
+System status at [status.yangl1996.com](http://status.yangl1996.com)
