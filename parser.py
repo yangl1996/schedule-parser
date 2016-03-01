@@ -27,6 +27,7 @@ def handle_iaaa(username, password):
     result = json.loads(r.text)
     if result['success'] is True:
         token = result['token']
+        session.headers.update({'referer': "http://elective.pku.edu.cn/elective2008/ssoLogin.do"})
         new_url = 'http://elective.pku.edu.cn/elective2008/ssoLogin.do' + '?rand=' + str(random_number) + '&token=' + token
         session.get(new_url)
         return session.get('http://elective.pku.edu.cn/elective2008/edu/pku/stu/elective/controller/electiveWork/showResults.do').text
