@@ -3,8 +3,9 @@ extends ./includes/layout.pug
 block title
   title PKU Schedule Parser
 
-block custom-css
+block custom-ref
   link(href="custom-css/signin.css", rel="stylesheet")
+  script(src="custom-js/signin.js")
 
 block content
   div(class="container")
@@ -13,4 +14,9 @@ block content
     h2(class="form-signin-heading") Please sign in
     input(type="email", id="inputEmail", class="form-control", placeholder="Email address", required, autofocus)
     input(type="password", id="inputPassword", class="form-control", placeholder="Password", required)
+    div(class="input-group")
+      input(type="captcha", id="inputCaptcha", class="form-control", placeholder="CAPTCHA", required)
+      span(class="input-group-addon")
+        a(href="javascript:check_img()")
+          img(class="captcha-image", id="dean-captcha", src="http://dean.pku.edu.cn/student/yanzheng.php?act=init", width="70", height="25")
     button(class="btn btn-lg btn-primary btn-block", type="submit") Sign in

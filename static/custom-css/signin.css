@@ -38,3 +38,9 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.form-signin input[type='captcha'] {
+  margin-bottom: 0;
+}
+.form-signin .input-group {
+  margin-bottom: 10px;
+}
