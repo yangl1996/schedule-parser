@@ -10,12 +10,12 @@ block custom-ref
 block content
   div(class="container")
 
-  form(class="form-signin")
+  form(class="form-signin", id="loginForm", method="POST", action="")
     h2(class="form-signin-heading") Please sign in
-    input(type="email", id="inputEmail", class="form-control", placeholder="Email address", required, autofocus)
-    input(type="password", id="inputPassword", class="form-control", placeholder="Password", required)
+    input(type="email", id="inputID", name="inputID", class="form-control", placeholder="Student ID", required, autofocus)
+    input(type="password", id="inputPassword", name="inputPassword", class="form-control", placeholder="Password", required)
     div(class="input-group")
-      input(type="captcha", id="inputCaptcha", class="form-control", placeholder="CAPTCHA", required)
+      input(type="captcha", id="inputCaptcha", name="inputCaptcha", class="form-control", placeholder="CAPTCHA", required)
       span(class="input-group-addon")
         a(href="javascript:check_img()")
           img(class="captcha-image", id="dean-captcha", src="/dean-captcha", width="70", height="25")

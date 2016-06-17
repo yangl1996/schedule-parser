@@ -8,4 +8,7 @@ module.exports = function(app) {
 
   /* fetch captcha and send to client */
   app.get('/dean-captcha', agent.fetch_captcha);
+
+  /* handle login form */
+  app.post('/', agent.handle_login_form);
 };
