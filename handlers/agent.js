@@ -105,7 +105,8 @@ function schedule_downloader(req, res) {
     function (error, response, body) {
       // process the class schedule
       handle_exit(req, res);
-      parser.parse_schedule(body);
+      class_schedule = parser.parse_schedule(body);
+      ics_dispatcher(req, res, class_schedule);
     });
 }
 
@@ -114,4 +115,8 @@ function handle_exit(req, res) {
   fake_header = schedule_header;
   fake_header['cookie'] = req.get('cookie');
   request({uri: logout_url, headers: fake_header});
+}
+
+function ics_dispatcher(req, res, schedule) {
+  ics_raw_string = parser.schedule_to_ical(schedule, "2016-02-22");
 }

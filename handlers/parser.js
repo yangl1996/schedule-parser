@@ -132,7 +132,8 @@ function parse_schedule(html_string) {
 function class_to_ical(class_meta, first_monday) {
   /* first_monday: the first day of that semester, in moment.js object */
   var vevent_str = '';
-  for (time_instance in class_meta['time']) {
+  for (idx in class_meta['time']) {
+    time_instance = class_meta['time'][idx];
     vevent_str += 'BEGIN:VEVENT\n';
     vevent_str += 'TRANSP:OPAQUE\n';
     vevent_str += 'SEQUENCE:0\n';
@@ -196,8 +197,9 @@ function schedule_to_ical(class_schedule, first_monday) {
      'TZOFFSETTO:+0900',
      'RDATE:19910414T000000',
      'END:DAYLIGHT',
-     'END:VTIMEZONE'].join('\n');
-  for (class_instance in class_schedule) {
+     'END:VTIMEZONE\n'].join('\n');
+  for (idx in class_schedule) {
+    class_instance = class_schedule[idx];
     if (class_instance['time'].length > 0) {
       ical_string += class_to_ical(class_instance, first_monday);
     }
