@@ -22,8 +22,9 @@
     "cheerio": "^0.20.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
-    "ical.js": "^1.2.1",
+    "moment": "^2.13.0",
     "pug": "^2.0.0-beta3",
+    "randomstring": "^1.1.5",
     "request": "^2.72.0"
   }
 }
