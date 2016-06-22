@@ -118,7 +118,7 @@ function handle_exit(req, res) {
 }
 
 function ics_dispatcher(req, res, schedule) {
-  ics_raw_string = parser.schedule_to_ical(schedule, "2016-02-22");
+  ics_raw_string = parser.schedule_to_ical(schedule, process.env.SEMESTER_START_DATE || "2016-02-22");
   res.set('Content-Type', 'text/calendar; charset=utf-8');
   res.set('Content-Disposition', 'attachment; filename=class.ics');
   res.send(ics_raw_string);
