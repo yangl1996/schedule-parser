@@ -104,5 +104,13 @@ function schedule_downloader(req, res) {
     function (error, response, body) {
       // process the class schedule
       console.log(body);
+      handle_exit(req, res);
     });
+}
+
+function handle_exit(req, res) {
+  logout_url = 'http://dean.pku.edu.cn/student/exit.php\?' + req.get('cookie');
+  fake_header = schedule_header;
+  fake_header['cookie'] = req.get('cookie');
+  request({uri: logout_url, headers: fake_header});
 }
