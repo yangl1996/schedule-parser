@@ -105,7 +105,7 @@ function schedule_downloader(req, res) {
     function (error, response, body) {
       // process the class schedule
       handle_exit(req, res);
-      class_schedule = parser.parse_schedule(body);
+      var class_schedule = parser.parse_schedule(body);
       ics_dispatcher(req, res, class_schedule);
     });
 }
@@ -119,4 +119,8 @@ function handle_exit(req, res) {
 
 function ics_dispatcher(req, res, schedule) {
   ics_raw_string = parser.schedule_to_ical(schedule, "2016-02-22");
+  res.set('Content-Type', 'text/calendar; charset=utf-8');
+  res.set('Content-Disposition', 'attachment; filename=class.ics');
+  res.send(ics_raw_string);
+  res.end();
 }
