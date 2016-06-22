@@ -4,7 +4,7 @@ exports.handle_login_form = handle_login_form;
 var request = require('request');
 
 /* header used to get dean.pku.edu.cn page */
-var trivial_header = {
+var login_header = {
   'host': 'dean.pku.edu.cn',
   'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101  Firefox/28.0',
@@ -27,10 +27,21 @@ var post_header = {
   'accept-encoding': 'gzip, deflate'
 }
 
+/* header used to get class schedule */
+var schedule_header = {
+  'host': 'dean.pku.edu.cn',
+  'referer': 'http://dean.pku.edu.cn/student/authenticate.php',
+  'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:28.0) Gecko/20100101  Firefox/28.0',
+  'accept-language': 'zh-cn',
+  'accept-encoding': 'gzip, deflate',
+  'connection': 'keep-alive'
+};
+
 function fetch_captcha(req, res) {
   request({
     uri: 'http://dean.pku.edu.cn/student/yanzheng.php?act=init',
-    headers: trivial_header,
+    headers: login_header,
   }).pipe(res);
 };
 
@@ -61,6 +72,37 @@ function handle_login_form(req, res) {
     else if (body.indexOf('student_index.php?PHPSESSID=') > -1) {
       login_status = 1;
     }
-    console.log(login_status);
+    login_result_checker(req, res, login_status);
   });
+}
+
+/* respond login result */
+function login_result_checker(req, res, login_result) {
+  switch (login_result) {
+    case 0:
+      res.send("Unknown error happened!");
+      break;
+    case 1:
+      schedule_downloader(req, res);
+      break;
+    case 2:
+      res.send("Wrong identity!");
+      break;
+    case 3:
+      res.send("Wrong CAPTCHA!");
+      break;
+  }
+}
+
+function schedule_downloader(req, res) {
+  schedule_url = 'http://dean.pku.edu.cn/student/newXkInfo_1105.php\?' + req.get('cookie');
+  fake_header = schedule_header;
+  fake_header['cookie'] = req.get('cookie');
+  request({
+    uri: schedule_url,
+    headers: fake_header},
+    function (error, response, body) {
+      // process the class schedule
+      console.log(body);
+    });
 }
