@@ -2,6 +2,7 @@ exports.fetch_captcha = fetch_captcha;
 exports.handle_login_form = handle_login_form;
 
 var request = require('request');
+var parser = require('./parser');
 
 /* header used to get dean.pku.edu.cn page */
 var login_header = {
@@ -103,8 +104,8 @@ function schedule_downloader(req, res) {
     headers: fake_header},
     function (error, response, body) {
       // process the class schedule
-      console.log(body);
       handle_exit(req, res);
+      parser.parse_schedule(body);
     });
 }
 
