@@ -5,9 +5,9 @@ and parses it into an `.ics` file.
 
 ## Getting Started
 
-__tl;dr__
+__tl;dr: Navigate to [cp.yangl1996.com](https://cp.yangl1996.com) and enjoy.__
 
-__Navigate to [cp.yangl1996.com](https://cp.yangl1996.com) and enjoy.__
+---
 
 ```
 npm install
@@ -17,7 +17,7 @@ You may also manually download bootstrap and jQuery and place the code under
 `static/jquery` and `static/bootstrap`.
 
 Then just open `index.html` with your browser or host it with a static HTTP server.
-If you don't want to hassle with command line tools or web servers, you may also use the
+If you don't want to hassle with command line tools or web servers, you may use the
 instance I host on [cp.yangl1996.com](https://cp.yangl1996.com).
 
 ## Security
