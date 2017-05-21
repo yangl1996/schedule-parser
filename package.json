@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/yangl1996/schedule-parser#readme",
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.2.1"
   }
 }
