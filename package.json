@@ -1,6 +1,6 @@
 {
   "name": "pku-schedule-parser",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A web app downloading your class schedule from dean.pku.edu.cn and parsing it into an .ics file.",
   "main": "app.js",
   "scripts": {

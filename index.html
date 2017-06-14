@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf=8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PKU Schedule Parser</title>
-	<link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="static/signin.css" rel="stylesheet">
-	<script src="static/signin.js">
-	</script>
-	<script src="static/jquery/jquery.min.js">
-	</script>
-	<script src="static/bootstrap/js/bootstrap.min.js">
-	</script>
+  <meta charset="utf=8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PKU Schedule Parser</title>
+  <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/signin.css" rel="stylesheet">
+  <script src="static/captcha.js"></script>
+  <script src="static/jquery/jquery.min.js"></script>
+  <script src="static/bootstrap/js/bootstrap.min.js"></script>
+  <script src="static/pageinit.js"></script>
 </head>
 <body>
-<div class="container">
-</div>
-<form class="form-signin" id="loginForm" method="POST" action="">
-	<h2 class="form-signin-heading">
-		Please sign in 
-	</h2>
-	<input class="form-control" type="email" id="inputID" name="inputID" placeholder="Student ID" required autofocus>
-	<input class="form-control" type="password" id="inputPassword" name="inputPassword" placeholder="IAAA Password" required>
-	<div class="input-group">
-		<input class="form-control" type="captcha" id="inputCaptcha" name="inputCaptcha" placeholder="CAPTCHA" required>
-		<span class="input-group-addon"><a href="javascript:check_img()"><img class="captcha-image" id="dean-captcha" src="/dean-captcha" width="70" height="25"></a></span> 
-	</div>
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> 
-</form>
+  <div class="container">
+  </div>
+  <form class="form-signin" id="loginForm" method="POST" action="">
+    <h2 class="form-signin-heading">
+      Please sign in 
+    </h2>
+    <input class="form-control" type="email" id="inputID" name="inputID" placeholder="Student ID" required autofocus>
+    <input class="form-control" type="password" id="inputPassword" name="inputPassword" placeholder="IAAA Password" required>
+    <div class="input-group">
+      <input class="form-control" type="captcha" id="inputCaptcha" name="inputCaptcha" placeholder="CAPTCHA" required>
+      <span class="input-group-addon">
+        <a href="javascript:update_captcha()">
+          <img class="captcha-image" src="./static/loading.svg" id="dean-captcha" width="70" height="25">
+          <!-- loading status icon generated with loading.io -->
+        </a>
+      </span> 
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> 
+  </form>
 </body>
 </html>

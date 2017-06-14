@@ -46,6 +46,7 @@ function fetch_captcha(req, res) {
   }).pipe(res);
 };
 
+
 function handle_login_form(req, res) {
   fake_header = post_header;
   fake_header['cookie'] = req.get('cookie');  // pass the cookie to make captcha work
@@ -124,3 +125,4 @@ function ics_dispatcher(req, res, schedule) {
   res.send(ics_raw_string);
   res.end();
 }
+
