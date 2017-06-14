@@ -10,6 +10,9 @@ function update_captcha(){
     }
   }
   xhr.responseType = "arraybuffer";
+  xhr.withCredentials = true; /* to let the browser to honor the cookie */
+  /* https://stackoverflow.com/questions/12840410/how-to-get-a-cookie-from-an-ajax-response */
+  /* Server needs to set Access-Control-Allow-Credential to true. */
   xhr.open("GET", "http://dean.pku.edu.cn/student/yanzheng.php?act=init&rand="+Math.random(), true);
   xhr.send();
 }
